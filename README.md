@@ -9,3 +9,6 @@ Hobby app and school project merged together.
 # Startup
  * npm start
  
+#API
+SWAGGER for api documentation
+http://api.partyplanner.si/docs/index.html
