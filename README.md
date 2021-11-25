@@ -3,7 +3,7 @@ Hobby app and school project merged together.
 
 
 # Installation
- * Node.js version v14.18.1
+ * Node.js version v14.18.1 https://nodejs.org/en/blog/release/v14.18.1/
  * npm install -g expo-cli
 
 # Startup
