@@ -10,11 +10,23 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 
+const MyTheme = {
+  dark: true,
+  colors: {
+    primary: 'rgb(255, 45, 85)',
+    background: '#303138',
+    card: '#303138',
+    text: '#ffffff',
+    border: '#36373e',
+    notification: '#ffffff',
+  },
+};
+
 export default function Navigation() {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={DarkTheme}>
+      theme={MyTheme}>
       <RootNavigator />
     </NavigationContainer>
   );

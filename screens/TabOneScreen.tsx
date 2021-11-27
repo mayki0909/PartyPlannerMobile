@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import style from '../components/style';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
@@ -10,10 +11,17 @@ interface TabOneProps{
 
 export default function TabOneScreen(props: TabOneProps) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title} onPress={()=>{props.navigation.navigate('TabTwo')}}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+    <View style={style.body}>
+      <View style={style.content}>
+  
+        <View style={style.btnSmall}>
+            Back
+        </View>
+        <View style={style.btnSmall}>
+            Back
+        </View>
+        
+      </View>
     </View>
   );
 }
