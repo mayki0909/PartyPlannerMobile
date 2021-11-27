@@ -13,14 +13,12 @@ export default function TabOneScreen(props: TabOneProps) {
   return (
     <View style={style.body}>
       <View style={style.content}>
-  
         <View style={style.btnSmall}>
             Back
         </View>
         <View style={style.btnSmall}>
             Back
         </View>
-        
       </View>
     </View>
   );
