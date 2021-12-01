@@ -11,6 +11,7 @@ In app you can:
 # Installation
  * Node.js version v14.18.1 https://nodejs.org/en/blog/release/v14.18.1/
  * npm install -g expo-cli
+ * npm install
 
 # Startup
  * npm start
