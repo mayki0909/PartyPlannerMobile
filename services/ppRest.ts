@@ -1,6 +1,6 @@
 
 
-const api = 'http://api.partyplanner.si/api';
+const api = 'http://mobile-api.partyplanner.si/api';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -11,7 +11,6 @@ export const getAllParties = async () =>{
 
     let response = await fetch(`${api}/party`,{
         method: 'GET',
-        mode: 'no-cors',
         // headers: headers
     });
 
