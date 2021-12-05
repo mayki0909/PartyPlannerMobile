@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { View,Text,StyleSheet } from 'react-native';
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 import style from '../components/style';
-import { Text, View } from '../components/Themed';
 import {getAllParties} from '../services/ppRest';
 
 interface LandingProps{
@@ -17,14 +17,32 @@ const consoleData = async () => {
 
 export default function LandingScreen(props: LandingProps) {
   return (
-    <View style={styles.container}>
-        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{await consoleData()}}>
+    <Grid style={styles.container}>
+        <Row style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{await consoleData()}}>
             <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
-        </View>
-        <View style={{backgroundColor: 'transparent'}} onTouchStart={()=>{props.navigation.navigate('Archive')}}>
+        </Row>
+        <Row style={{backgroundColor: 'transparent'}}>
             <Text style={style.btnBig}>PARTY ARCHIVE</Text>
-        </View>
-    </View>
+        </Row>
+        <Row>
+          <Col>
+            <Text>Gapy rojstni dan</Text>
+            <Text>21.03.21</Text>
+          </Col>
+          <Col>
+            <Text>{'>'}</Text>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Text>Gapy rojstni dan</Text>
+            <Text>21.03.21</Text>
+          </Col>
+          <Col>
+            <Text>{'>'}</Text>
+          </Col>
+        </Row>
+    </Grid>
   );
 }
 

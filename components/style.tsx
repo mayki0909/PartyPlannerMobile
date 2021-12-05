@@ -41,14 +41,16 @@ export default StyleSheet.create({
   btnBig: {
     width: '250px',
     height: '60px',
+    margin: '10px',
     backgroundColor: '#303138',
     color: '#fff',
-    fontSize: '25px',
+    fontSize: 20,
+    fontWeight: 'bold',
     borderRadius: 30,
     boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-}
+  }, 
 
 });
