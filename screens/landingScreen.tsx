@@ -13,6 +13,7 @@ interface LandingProps{
 export default function LandingScreen(props: LandingProps) {
   return (
     <View style={styles.container}>
+        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{props.navigation.navigate('CreateParty')}}>
         <View style={{backgroundColor: 'transparent'}} onTouchStart={()=>{}}>
             <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
         </View>

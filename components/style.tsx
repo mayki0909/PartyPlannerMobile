@@ -30,7 +30,7 @@ export default StyleSheet.create({
     height: '40px',
     backgroundColor: '#303138',
     color: '#fff',
-    fontRize: '12px',
+    fontSize: '12px',
     borderRadius: 30,
     boxShadow: '3px 3px 6px #23242A, -3px -3px 6px #3B3D44',
     display: 'flex',
@@ -51,6 +51,26 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  primaryColor: {
+    color: '#00ffff',
   }, 
+  secondaryColor: {
+    color: '#D300FF',
+  },
+  createPartyContainer: {
+    width: '80%',
+    height: '20%',
+    margin: '10px',
+    backgroundColor: '#303138',
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+    borderRadius: 30,
+    boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'left',
+  }
 
 });

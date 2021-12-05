@@ -14,6 +14,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
         Landing: '/',
+        CreateParty: '/createParty',
         Archive: '/archive',
         TabOne: {
           screens: {
