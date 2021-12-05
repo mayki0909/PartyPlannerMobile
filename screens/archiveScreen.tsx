@@ -24,7 +24,6 @@ export default function LandingScreen(props: LandingProps) {
 
   return (
     <SafeAreaView style={styles.container}>
-  
         <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{}}>
           <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
         </View>
@@ -46,9 +45,7 @@ export default function LandingScreen(props: LandingProps) {
               })}
             </Grid>  
         </ScrollView>
- 
     </SafeAreaView>
- 
   );
 }
 
