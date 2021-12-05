@@ -15,6 +15,7 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
         Landing: '/',
         Archive: '/archive',
+        PartyInfo: '/partyInfoScreen',
         TabOne: {
           screens: {
             TabOneScreen: 'one',
