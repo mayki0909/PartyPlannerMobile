@@ -9,16 +9,11 @@ interface LandingProps{
   navigation: any;
 }
 
-const consoleData = async () => {
-  const data = await getAllParties()
-  console.log(data);
-}
-
 
 export default function LandingScreen(props: LandingProps) {
   return (
     <View style={styles.container}>
-        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{await consoleData()}}>
+        <View style={{backgroundColor: 'transparent'}} onTouchStart={()=>{}}>
             <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
         </View>
         <View style={{backgroundColor: 'transparent'}} onTouchStart={()=>{props.navigation.navigate('Archive')}}>
