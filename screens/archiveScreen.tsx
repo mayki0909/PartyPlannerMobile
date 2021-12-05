@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View,Text,StyleSheet } from 'react-native';
+import { SafeAreaView,ScrollView,View,Text,StyleSheet } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
+import {Party} from '../models';
 import style from '../components/style';
 import {getAllParties} from '../services/ppRest';
 
@@ -9,63 +10,81 @@ interface LandingProps{
   navigation: any;
 }
 
-const consoleData = async () => {
-  const data = await getAllParties()
-  console.log(data);
-}
-
-
 export default function LandingScreen(props: LandingProps) {
+  const [parties, setParties] = React.useState<Party[]>();
+
+  const getParties = async () => {
+    const data = await getAllParties()
+    setParties(data)
+  }
+
+  React.useEffect(() => {
+    getParties();
+  },[]);
+
   return (
-    <Grid style={styles.container}>
-        <Row style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{await consoleData()}}>
-            <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
-        </Row>
-        <Row style={{backgroundColor: 'transparent'}}>
-            <Text style={style.btnBig}>PARTY ARCHIVE</Text>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Gapy rojstni dan</Text>
-            <Text>21.03.21</Text>
-          </Col>
-          <Col>
-            <Text>{'>'}</Text>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Text>Gapy rojstni dan</Text>
-            <Text>21.03.21</Text>
-          </Col>
-          <Col>
-            <Text>{'>'}</Text>
-          </Col>
-        </Row>
-    </Grid>
+    <SafeAreaView style={styles.container}>
+        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{}}>
+          <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
+        </View>
+        <ScrollView style={[style.content, styles.spacing]}>
+          <Text style={styles.heading}>PARTY ARCHIVE</Text>
+          <Grid>
+              {parties?.map((party,key)=>{
+                return(
+                  <Row style={styles.spacing}>
+                    <Col size={75}>
+                      <Text style={styles.nameText}>{party.info.name}</Text>
+                      <Text style={styles.dateText}>{party.info.dateFrom}</Text>
+                    </Col>
+                    <Col size={25} onPress={()=>{props.navigation.navigate('Party',{id:party.id})}}>
+                      <img src={require('../assets/images/go.svg')} alt="Go to" />
+                    </Col>
+                  </Row>
+                )
+              })}
+            </Grid>  
+        </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height:'80%',
+      backgroundColor: 'transparent',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height:'80%',
     },
     btnBigBlue:{
       color: "#00ffff",
-    }
-
-    // btnBigBlue:{
-    //   border:"2px solid #00ffff",
-    //   shadowColor: "#00ffff",
-    //   shadowOffset: {
-    //     width: 4,
-    //     height: 4,
-    //   },
-    //   shadowOpacity: 1,
-    //   shadowRadius: 10,
-    // }
-
+    },
+    heading:{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 250,
+      color: '#fff',
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    nameText:{
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    dateText:{
+      color: '#fff',
+      fontSize: 14,
+    },
+    goButton:{
+      backgroundColor: "#00ffff",
+      borderRadius: 120,
+      width: 30,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    spacing:{
+      marginTop:'20px',
+    },
 });
