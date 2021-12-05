@@ -18,7 +18,7 @@ const consoleData = async () => {
 export default function LandingScreen(props: LandingProps) {
   return (
     <View style={styles.container}>
-        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{await consoleData()}}>
+        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{props.navigation.navigate('CreateParty')}}>
             <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
         </View>
         <View style={{backgroundColor: 'transparent'}} onTouchStart={()=>{props.navigation.navigate('Archive')}}>
