@@ -6,11 +6,11 @@ import {Party} from '../models';
 import style from '../components/style';
 import {getAllParties} from '../services/ppRest';
 
-interface LandingProps{
+interface ArchiveProps{
   navigation: any;
 }
 
-export default function LandingScreen(props: LandingProps) {
+export default function ArchiveScreen(props: ArchiveProps) {
   const [parties, setParties] = React.useState<Party[]>();
 
   const getParties = async () => {
@@ -32,7 +32,7 @@ export default function LandingScreen(props: LandingProps) {
           <Grid>
               {parties?.map((party,key)=>{
                 return(
-                  <Row style={styles.spacing}>
+                  <Row style={styles.spacing} key={key}>
                     <Col size={75}>
                       <Text style={styles.nameText}>{party.info.name}</Text>
                       <Text style={styles.dateText}>{party.info.dateFrom}</Text>
