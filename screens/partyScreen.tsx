@@ -1,43 +1,40 @@
 import * as React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { SegmentedControlIOSComponent, StyleSheet, TextInput } from 'react-native';
 
 import style from '../components/style';
 import { Text, View } from '../components/Themed';
-import {putParty} from '../services/ppRest';
+import {getPartyById} from '../services/ppRest';
 
-
-interface CreatePartyProps{
+interface PartyProps{
   navigation: any;
+  route: any
 }
 
-
-export default function CreatePartyScreen(props: CreatePartyProps) {
-  
-    const [partyName, setPartyName] = React.useState("");
-
-    async function callCreateApi() {
+export default function PartyScreen(props: PartyProps) {
+    const partyId = props.route.params.partyId;
+    const [party, setParty] = React.useState(null)
+    console.log(partyId)
+    
+    async function getPartyData() {
         // TODO Check if party name not null and show error
-        const response = await putParty(partyName)
-        if (response.id){
-            props.navigation.navigate('Party',{
-                partyId: response.id
-            })
+        const response = await getPartyById(partyId)
+        if (response){
+            setParty(response)
+            console.log(response)
         }
         // TODO Show error ...
     }
 
+    React.useEffect(() => {
+        getPartyData()
+    }, []);
+
     return (
     <View style={styles.container}>
         <View style={styles.createPartyContainer}>
-            <Text style={styles.label}>Name your party:</Text>
-                <TextInput
-                    style={styles.inputField}
-                    placeholder="Name your party"
-                    autoFocus={true}
-                    value={partyName}
-                    onChangeText={text => {setPartyName(text)}}
-                ></TextInput>
-                <Text style={style.btnSmall} onPress={callCreateApi}>Create</Text>
+            <Text style={styles.label}>Party page</Text>
+                
+              
         </View>
     </View>
   );

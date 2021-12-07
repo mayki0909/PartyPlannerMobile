@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import style from '../components/style';
 import { Text, View } from '../components/Themed';
-import {getAllParties} from '../services/ppRest';
 
 interface LandingProps{
   navigation: any;
@@ -20,8 +19,6 @@ export default function LandingScreen(props: LandingProps) {
             <Text style={style.btnBig}>PARTY ARCHIVE</Text>
         </View>
     </View>
-    
-   
   );
 }
 
