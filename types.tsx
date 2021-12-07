@@ -10,6 +10,7 @@ export type RootStackParamList = {
   CreateParty:undefined;
   Party:undefined;
   Archive:undefined;
+  PartyInfo:undefined;
   Modal: undefined;
   NotFound: undefined;
   TabOne: undefined;
