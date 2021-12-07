@@ -67,6 +67,7 @@ function RootNavigator() {
         <Stack.Screen 
         name={'PartyInfo'}
         component={PartyInfoScreen} 
+      ></Stack.Screen>
       <Stack.Screen 
         name={'CreateParty'}
         component={CreatePartyScreen} 
