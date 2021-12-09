@@ -20,7 +20,7 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
        if(partyName != ""){
             const response = await putParty(partyName)
             if (response.id){
-                props.navigation.navigate('Party',{
+                props.navigation.navigate('Details',{
                     id: response.id
                 })
             }
@@ -32,16 +32,16 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
     <View style={styles.container}>
         <View style={styles.createPartyContainer}>
             <Text style={styles.label}>Name your party:</Text>
-                <TextInput
-                    style={styles.inputField}
-                    placeholder="Name your party"
-                    autoFocus={true}
-                    value={partyName}
-                    onChangeText={text => {setPartyName(text)}}
-                ></TextInput>
-                <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
+            <TextInput
+                style={styles.inputField}
+                placeholder="Name your party"
+                autoFocus={true}
+                value={partyName}
+                onChangeText={text => {setPartyName(text)}}
+            ></TextInput>
+            <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
                 {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
-                )}
+            )}
         </View>
     </View>
   );

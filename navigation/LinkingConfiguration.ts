@@ -17,7 +17,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         CreateParty: '/createParty',
         Party: '/party',
         Archive: '/archive',
-        PartyDetails: '/details',
+        Details: '/details',
         TabOne: {
           screens: {
             TabOneScreen: 'one',

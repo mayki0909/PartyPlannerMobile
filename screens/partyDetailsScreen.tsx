@@ -5,39 +5,59 @@ import style from '../components/style';
 import { Text, View } from '../components/Themed';
 import {putParty} from '../services/ppRest';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import {getPartyById} from '../services/ppRest';
+import {Party} from '../models';
 
 
-interface CreatePartyProps{
-  navigation: any;
-}
+interface DetailProps{
+    navigation: any;
+    route: any;
+  }
 
+export default function DetailsScreen(props: DetailProps) {
+    
+    const partyId = props.route.params.id;
+    const [party, setParty] = React.useState<Party|undefined>();
 
-export default function CreatePartyScreen(props: CreatePartyProps) {
-  
-    const [partyName, setPartyName] = React.useState("");
+    async function callCreateApi() {
+        if(streetAddress != "" && apartment != "" && description != "" && price != ""){
+             const response = await putParty(partyName)
+             if (response.id){
+                 props.navigation.navigate('Details',{
+                     id: response.id
+                 })
+             }
+         }
+         setErrorMessage("Please fill in all the fields!")
+     }
+
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [partyName, setPartyName] = React.useState("");
 
     const [streetAddress, setStreetAddress] = React.useState("");
     const [apartment, setApartment] = React.useState("");
     const [description, setDescription] = React.useState("");
+    const [date, setDate] = React.useState("");
     const [price, setPrice] = React.useState("");
 
     const [days, setDays] = React.useState(0);
 
-    async function callCreateApi() {
-       if(partyName != ""){
-            const response = await putParty(partyName)
-            if (response.id){
-                props.navigation.navigate('Party',{
-                    id: response.id
-                })
-            }
+
+    async function getPartyData() {
+        const response = await getPartyById(partyId)
+        if (response){
+            setParty(response)
+            console.log(response)
         }
-        setErrorMessage("The party name can't be empty!")
     }
+
+    React.useEffect(() => {
+        getPartyData()
+    }, []);
 
     return (
     <View style={styles.container}>
+        <Text style={styles.title}>{party?.info.name} party</Text>
         <View style={styles.createPartyContainer}>
             <Row>
                 <Col size={120}>
@@ -72,11 +92,9 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
             </Row>
             <Row>
                 <Col size={80}>
-                    
+                    <input value={date} type="datetime-local"></input>
                 </Col>
-                <Col size={40}>
-                    
-                </Col>
+                <Col size={40}></Col>
             </Row>
             <Row>
                 <Col size={120}>
@@ -99,28 +117,30 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
                 </Col>
             </Row>
             <Row>
-                <Col size={40}>
-                        <TextInput
-                            style={styles.inputField}
-                            placeholder="€"
-                            value={price}
-                            keyboardType={'numeric'}
-                            onChangeText={text => {setPrice(text)}}
-                        ></TextInput>
+                <Col>
+                    <TextInput
+                        style={styles.inputField}
+                        placeholder="€"
+                        value={price}
+                        keyboardType={'numeric'}
+                        onChangeText={text => {setPrice(text)}}
+                    ></TextInput>
                 </Col>
-                <Col size={20}>
+                <Col>
                     <Text style={styles.text}>Days:</Text>
                 </Col>
-                <Col size={20}>
-                    <Text style={styles.text}>{days}</Text>
+                <Col>
+                    <Text style={styles.number}>{days}</Text>
                 </Col>
-                <Col size={30}>
+                <Col>
                     <Text style={styles.count} onPress={ () => {setDays(days + 1)} }>+</Text>
-                    <Text style={styles.count} onPress={ () => {setDays(days - 1)} }>-</Text>
+                    <Text style={[styles.count, styles.left]} onPress={ () => {if (days > 0) setDays(days - 1)} }>-</Text>
                 </Col>
             </Row>
-
         </View>
+        <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
+                {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
+        )}
     </View>
   );
 }
@@ -179,11 +199,35 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginRight: 10,
     }, 
+    number: {
+        color: '#fff',
+        fontSize: 14,
+        marginTop: 10,
+    },
     count: {
         color: '#fff',
         fontSize: 20,
         marginLeft: 10,
         marginTop: -5,
-    }
+    },
+    left: {
+        paddingLeft: 2,
+    },
+    title: {
+        color: '#fff',
+        fontSize: 40, 
+        fontWeight: 'bold', 
+        marginBottom: 30,
+        textAlign: 'center',
+    },
+    button: {
+        fontSize: 16,
+        marginTop: 20,
+    },
+    errorMessage: {
+        color: 'red', 
+        fontSize: 16,
+        marginTop: 10,
+    },
 
 });

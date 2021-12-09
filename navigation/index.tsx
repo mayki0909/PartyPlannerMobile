@@ -75,7 +75,7 @@ function RootNavigator() {
         options={{ headerTitle: (props) => <LogoTitle /> }}
       ></Stack.Screen>
       <Stack.Screen 
-        name={'PartyDetails'}
+        name={'Details'}
         component={PartyDetailsScreen} 
         options={{ headerTitle: (props) => <LogoTitle /> }}
       ></Stack.Screen>
