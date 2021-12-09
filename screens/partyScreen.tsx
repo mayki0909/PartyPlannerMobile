@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { SegmentedControlIOSComponent, StyleSheet, TextInput } from 'react-native';
+import { SafeAreaView,ScrollView,View,Text,StyleSheet } from 'react-native';
+import { Col, Row, Grid } from "react-native-easy-grid";
 
-import style from '../components/style';
-import { Text, View } from '../components/Themed';
 import {getPartyById} from '../services/ppRest';
+import {Party} from '../models';
 
 interface PartyProps{
   navigation: any;
-  route: any
+  route: any;
 }
 
 export default function PartyScreen(props: PartyProps) {
-    const partyId = props.route.params.partyId;
+
+    const partyId = props.route.params.id;
     const [party, setParty] = React.useState(null)
-    console.log(partyId)
-    
+
     async function getPartyData() {
         // TODO Check if party name not null and show error
         const response = await getPartyById(partyId)
@@ -29,13 +29,42 @@ export default function PartyScreen(props: PartyProps) {
         getPartyData()
     }, []);
 
-    return (
+  return (
     <View style={styles.container}>
-        <View style={styles.createPartyContainer}>
-            <Text style={styles.label}>Party page</Text>
-                
-              
-        </View>
+
+        <Row style={styles.spacing}>
+            <Col size={150}>
+                <Text style={styles.nameText}>ITEMS NEEDED</Text>
+            </Col>
+            <Col size={50} style={styles.image}>
+                <img src={require('../assets/images/Beer.svg')} width="100"/>
+            </Col>
+        </Row>
+
+        <Row style={styles.spacing}>
+            <Col size={150}>
+                <Text style={styles.nameText}>LOCATION</Text>
+            </Col>
+            <Col size={50} style={styles.image}>
+                <img src={require('../assets/images/Pin.svg')} width="100"/>
+            </Col>
+        </Row>
+
+        <Row style={styles.spacing}>
+            <Col size={150}>
+                <Text style={styles.nameText}>GUEST LIST</Text>
+            </Col>
+            <Col size={50} style={styles.image}>
+                <img src={require('../assets/images/Person.svg')} width="100"/>
+            </Col>
+        </Row>
+
+        <Row style={styles.spacing}>
+            <Col size={150} style={styles.addCategory}>
+                <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
+            </Col>
+        </Row>
+
     </View>
   );
 }
@@ -47,33 +76,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height:'80%',
     },
-    label:{
-        fontSize: 16,
-        color: '#fff',
-        paddingBottom: 15,
-        paddingLeft: 20,
-        textAlign: 'left',
-    },
-    inputField:{
-        fontSize: 24,
-        borderRadius: 10,
-        borderColor: '#fff',
-        height: 40,
-        marginLeft: 20,
-        marginRight: 10,
-        paddingLeft: 10
-    },
-    createPartyContainer: {
+    spacing:{
+        marginTop:'8%',
         width: '80%',
-        height: '20%',
-        margin: '10px',
-        backgroundColor: '#303138',
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
         borderRadius: 30,
         boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
-        display: 'flex',
-        justifyContent: 'center',
-      }
+    },
+    addCategory: {
+        backgroundColor: '#7F818B',
+        borderRadius: 30,
+    },
+    addCategoryText: {
+        color: '#000',
+        fontWeight: 'bold',
+    },
+    nameText:{
+        fontSize:25,
+        color: '#fff', 
+        textAlign: 'left',
+        paddingTop: '50px',
+        paddingLeft: '30px',
+        fontWeight: 'bold',
+    },
+    image:{
+        paddingTop: '20px',
+    }
 });

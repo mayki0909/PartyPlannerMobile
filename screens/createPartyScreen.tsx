@@ -20,7 +20,7 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
         const response = await putParty(partyName)
         if (response.id){
             props.navigation.navigate('Party',{
-                partyId: response.id
+                id: response.id
             })
         }
         // TODO Show error ...

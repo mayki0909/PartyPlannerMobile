@@ -13,9 +13,8 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import LandingScreen from '../screens/landingScreen';
 import ArchiveScreen from '../screens/archiveScreen';
 
-import PartyInfoScreen from '../screens/partyInfoScreen';
+import PartyScreen from '../screens/partyScreen';
 import CreatePartyScreen from '../screens/createPartyScreen';
-import PartyScreen from '../screens/PartyScreen';
 
 const MyTheme = {
   dark: true,
@@ -63,10 +62,6 @@ function RootNavigator() {
         name={'Archive'}
         component={ArchiveScreen} 
         options={{ headerTitle: (props) => <LogoTitle /> }}
-      ></Stack.Screen>
-        <Stack.Screen 
-        name={'PartyInfo'}
-        component={PartyInfoScreen} 
       ></Stack.Screen>
       <Stack.Screen 
         name={'CreateParty'}
