@@ -14,16 +14,18 @@ interface CreatePartyProps{
 export default function CreatePartyScreen(props: CreatePartyProps) {
   
     const [partyName, setPartyName] = React.useState("");
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     async function callCreateApi() {
-        // TODO Check if party name not null and show error
-        const response = await putParty(partyName)
-        if (response.id){
-            props.navigation.navigate('Party',{
-                id: response.id
-            })
+       if(partyName != ""){
+            const response = await putParty(partyName)
+            if (response.id){
+                props.navigation.navigate('Party',{
+                    id: response.id
+                })
+            }
         }
-        // TODO Show error ...
+        setErrorMessage("The party name can't be empty!")
     }
 
     return (
@@ -37,7 +39,9 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
                     value={partyName}
                     onChangeText={text => {setPartyName(text)}}
                 ></TextInput>
-                <Text style={style.btnSmall} onPress={callCreateApi}>Create</Text>
+                <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
+                {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
+                )}
         </View>
     </View>
   );
@@ -54,23 +58,23 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#fff',
         paddingBottom: 15,
-        paddingLeft: 20,
+        paddingTop: 20,
         textAlign: 'left',
     },
     inputField:{
         fontSize: 24,
         borderRadius: 10,
-        borderColor: '#fff',
+        color: '#fff',
         height: 40,
-        marginLeft: 20,
         marginRight: 10,
         paddingLeft: 10
     },
     createPartyContainer: {
         width: '80%',
-        height: '20%',
+        height: '30%',
         margin: '10px',
         backgroundColor: '#303138',
+        paddingLeft: 20,
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
@@ -78,5 +82,14 @@ const styles = StyleSheet.create({
         boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
         display: 'flex',
         justifyContent: 'center',
+      },
+      button: {
+        fontSize: 16,
+        marginTop: 20,
+      },
+      errorMessage: {
+        color: 'red', 
+        fontSize: 16,
+        marginTop: 10,
       }
 });
