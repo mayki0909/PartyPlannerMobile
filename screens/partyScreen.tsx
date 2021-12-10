@@ -59,7 +59,7 @@ export default function PartyScreen(props: PartyProps) {
             </Col>
         </Row>
 
-        <Row style={styles.spacing}>
+        <Row style={styles.spacing} onPress={props.navigation.navigate('Share',{id: partyId})}>
             <Col size={150} style={styles.addCategory}>
                 <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
             </Col>
