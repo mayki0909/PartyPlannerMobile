@@ -31,40 +31,38 @@ export default function PartyScreen(props: PartyProps) {
 
   return (
     <View style={styles.container}>
+            <Row style={styles.spacing}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>ITEMS NEEDED</Text>
+                </Col>
+                <Col size={70} style={styles.image}>
+                    <img src={require('../assets/images/Beer.svg')} width="100"/>
+                </Col>
+            </Row>
 
-        <Row style={styles.spacing}>
-            <Col size={150}>
-                <Text style={styles.nameText}>ITEMS NEEDED</Text>
-            </Col>
-            <Col size={50} style={styles.image}>
-                <img src={require('../assets/images/Beer.svg')} width="100"/>
-            </Col>
-        </Row>
+            <Row style={styles.spacing}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>LOCATION</Text>
+                </Col>
+                <Col size={70} style={styles.image}>
+                    <img src={require('../assets/images/Pin.svg')} width="100"/>
+                </Col>
+            </Row>
 
-        <Row style={styles.spacing}>
-            <Col size={150}>
-                <Text style={styles.nameText}>LOCATION</Text>
-            </Col>
-            <Col size={50} style={styles.image}>
-                <img src={require('../assets/images/Pin.svg')} width="100"/>
-            </Col>
-        </Row>
+            <Row style={styles.spacing}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>GUEST LIST</Text>
+                </Col>
+                <Col size={70} style={styles.image}>
+                    <img src={require('../assets/images/Person.svg')} width="100"/>
+                </Col>
+            </Row>
 
-        <Row style={styles.spacing}>
-            <Col size={150}>
-                <Text style={styles.nameText}>GUEST LIST</Text>
-            </Col>
-            <Col size={50} style={styles.image}>
-                <img src={require('../assets/images/Person.svg')} width="100"/>
-            </Col>
-        </Row>
-
-        <Row style={styles.spacing}>
-            <Col size={150} style={styles.addCategory}>
-                <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
-            </Col>
-        </Row>
-
+            <Row style={styles.spacing}>
+                <Col size={130} style={styles.addCategory}>
+                    <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
+                </Col>
+            </Row>
     </View>
   );
 }
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
         height:'80%',
     },
     spacing:{
-        marginTop:'8%',
+        marginTop: 20,
         width: '80%',
         borderRadius: 30,
         boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
@@ -94,11 +92,11 @@ const styles = StyleSheet.create({
         fontSize:25,
         color: '#fff', 
         textAlign: 'left',
-        paddingTop: '50px',
-        paddingLeft: '30px',
+        paddingTop: 30,
+        paddingLeft: 30,
         fontWeight: 'bold',
     },
     image:{
-        paddingTop: '20px',
+        paddingTop: 10,
     }
 });

@@ -42,10 +42,3 @@ export const putParty = async (name: string) =>{
     let data = await response.json();
     return data;
 }
-
-export const setPartyInfo = async (name: string, description: string, address: string, exectDirections: string, dateFrom: string, dateTo: string, budget: number) =>{
-
-    
-
-}
-

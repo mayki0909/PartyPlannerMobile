@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../components/style';
 import { Text, View } from '../components/Themed';
 import {putParty} from '../services/ppRest';
@@ -15,12 +16,12 @@ interface DetailProps{
   }
 
 export default function DetailsScreen(props: DetailProps) {
-    
+
     const partyId = props.route.params.id;
     const [party, setParty] = React.useState<Party|undefined>();
 
     async function callCreateApi() {
-        if(streetAddress != "" && apartment != "" && description != "" && price != ""){
+        if(streetAddress != "" && apartment != "" && date != null && description != "" && price != "" && days != 0){
              const response = await putParty(partyName)
              if (response.id){
                  props.navigation.navigate('Details',{
@@ -37,11 +38,16 @@ export default function DetailsScreen(props: DetailProps) {
     const [streetAddress, setStreetAddress] = React.useState("");
     const [apartment, setApartment] = React.useState("");
     const [description, setDescription] = React.useState("");
-    const [date, setDate] = React.useState("");
     const [price, setPrice] = React.useState("");
 
-    const [days, setDays] = React.useState(0);
 
+    // Date
+    const [days, setDays] = React.useState(0);
+    const [date, setDate] = React.useState(new Date(1598051730000));
+
+    const onChange = () => {
+        setDate(date);
+      };
 
     async function getPartyData() {
         const response = await getPartyById(partyId)
@@ -92,7 +98,11 @@ export default function DetailsScreen(props: DetailProps) {
             </Row>
             <Row>
                 <Col size={80}>
-                    <input value={date} type="datetime-local"></input>
+                <DateTimePicker
+                    value={date}
+                    is24Hour={true}
+                    onChange={onChange}
+                    />
                 </Col>
                 <Col size={40}></Col>
             </Row>
@@ -219,6 +229,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         marginBottom: 30,
         textAlign: 'center',
+        marginTop: '5%',
     },
     button: {
         fontSize: 16,
@@ -229,5 +240,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 10,
     },
-
 });
