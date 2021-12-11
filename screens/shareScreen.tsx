@@ -13,21 +13,23 @@ interface ShareProps{
 
 export default function ShareScreen(props: ShareProps) {
   const partyId = props.route.params.id;
-  const home = props.route.params;
-  let link = window.location.href.replace('share','party')
+  let link = 'http://app.partyplanner.si/party?'+partyId
   const copyIt = ()=> Clipboard.setString(link)
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
         SHARE AN INVITE
       </Text>
-      <Text onPress={copyIt}>
+      <Text style={styles.url} onPress={copyIt}>
         {link}
       </Text>
       <Text style={[style.btnMedium, styles.btnBigBlue]}>
         Copy to clipboard
       </Text>
-      <QRCode 
+      <Text style={styles.heading}>
+        SCAN IT
+      </Text>
+      <QRCode size={150}
         value={link} />
     </View>
   );
@@ -37,15 +39,33 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: 'transparent',
         alignItems: 'center',
-        justifyContent: 'center',
-        height:'80%',
+        // justifyContent: 'center',
+        height:'60%',
+        width: '80%',
+        marginLeft: '10%',
+        marginRight: '10%',
+        marginTop: '20%',
         borderRadius: 30,
-        boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
+        shadowColor: '#23242A',
+        shadowOffset: {width: 4, height: 4},
+        shadowOpacity: 1,
+        shadowRadius: 30,
     },
     heading:{
-
+      color: '#FFF',
+      fontSize: 25,
+      fontWeight: 'bold',
+      marginTop: 20,
+      marginBottom: 30,
+    },
+    url:{
+      color: '#FFF',
+      fontSize: 15,
+      margin: 10,
     },
     btnBigBlue:{
       color: "#00ffff",
+      marginTop: 10,
+      marginBottom: 50,
     }
 });
