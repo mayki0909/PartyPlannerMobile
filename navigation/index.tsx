@@ -12,6 +12,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import LandingScreen from '../screens/landingScreen';
 import ArchiveScreen from '../screens/archiveScreen';
+import ShareScreen from '../screens/shareScreen';
 
 import PartyScreen from '../screens/partyScreen';
 import CreatePartyScreen from '../screens/createPartyScreen';
@@ -77,6 +78,11 @@ function RootNavigator() {
       <Stack.Screen 
         name={'Details'}
         component={PartyDetailsScreen} 
+        options={{ headerTitle: (props) => <LogoTitle /> }}
+      ></Stack.Screen>
+      <Stack.Screen 
+        name={'Share'}
+        component={ShareScreen} 
         options={{ headerTitle: (props) => <LogoTitle /> }}
       ></Stack.Screen>
       <Stack.Screen name={'TabOne'} component={TabOneScreen}></Stack.Screen>

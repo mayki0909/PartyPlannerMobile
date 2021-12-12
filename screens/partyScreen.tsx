@@ -59,6 +59,15 @@ export default function PartyScreen(props: PartyProps) {
             </Row>
 
             <Row style={styles.spacing}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>SHARE</Text>
+                </Col>
+                <Col size={70} style={styles.image}>
+                    <Image source={require('../assets/images/share.png')} style={{width: 100}}/>
+                </Col>
+            </Row>
+
+            <Row style={styles.spacing}>
                 <Col size={130} style={styles.addCategory}>
                     <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
                 </Col>
