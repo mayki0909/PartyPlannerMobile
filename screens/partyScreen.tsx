@@ -31,39 +31,37 @@ export default function PartyScreen(props: PartyProps) {
 
   return (
     <View style={styles.container}>
-            <Row style={styles.spacing}>
-                <Col size={130}>
-                    <Text style={styles.nameText}>ITEMS NEEDED</Text>
-                </Col>
-                <Col size={70} style={styles.image}>
-                    <Image source={require('../assets/images/Beer.png')} style={{width: 100}}/>
-                </Col>
-            </Row>
-
-            <Row style={styles.spacing}>
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Details',{id: partyId})}}>
                 <Col size={130}>
                     <Text style={styles.nameText}>LOCATION</Text>
                 </Col>
-                <Col size={70} style={styles.image}>
-                    <Image source={require('../assets/images/Pin.png')} style={{width: 100}}/>
+                <Col size={70} >
+                    <Image source={require('../assets/images/Pin.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                 </Col>
             </Row>
-
-            <Row style={styles.spacing}>
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Items',{id: partyId})}}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>ITEMS NEEDED</Text>
+                </Col>
+                <Col size={70} >
+                    <Image source={require('../assets/images/Beer.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
+                </Col>
+            </Row>
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Guests',{id: partyId})}}>
                 <Col size={130}>
                     <Text style={styles.nameText}>GUEST LIST</Text>
                 </Col>
-                <Col size={70} style={styles.image}>
-                    <Image source={require('../assets/images/Person.png')} style={{width: 100}}/>
+                <Col size={70} >
+                    <Image source={require('../assets/images/Person.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                 </Col>
             </Row>
 
-            <Row style={styles.spacing}>
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Share',{id: partyId})}}>
                 <Col size={130}>
                     <Text style={styles.nameText}>SHARE</Text>
                 </Col>
-                <Col size={70} style={styles.image}>
-                    <Image source={require('../assets/images/share.png')} style={{width: 100}}/>
+                <Col size={70}>
+                    <Image source={require('../assets/images/share.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                 </Col>
             </Row>
 
@@ -86,7 +84,9 @@ const styles = StyleSheet.create({
     spacing:{
         marginTop: 20,
         width: '80%',
-        borderRadius: 30,
+        borderRadius: 40,
+        borderWidth: 3,
+        borderColor: "#3B3D44",
         //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
     },
     addCategory: {
@@ -98,14 +98,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     nameText:{
-        fontSize:25,
+        fontSize:22,
         color: '#fff', 
         textAlign: 'left',
-        paddingTop: 30,
-        paddingLeft: 30,
+        paddingTop: 35,
+        paddingLeft: 20,
         fontWeight: 'bold',
     },
-    image:{
-        paddingTop: 10,
-    }
 });
