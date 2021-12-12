@@ -33,7 +33,7 @@ function LogoTitle() {
   return (
     <Image
       style={{flex: 1, height: 80, width: 100, resizeMode: 'center',}}
-      source={require('../assets/images/PP_logotip.svg')}
+      source={require('../assets/images/PP_logotip.png')}
     />
   );
 }

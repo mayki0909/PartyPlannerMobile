@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-
-import DateTimePicker from '@react-native-community/datetimepicker';
-import style from '../components/style';
-import { Text, View } from '../components/Themed';
-import {putParty} from '../services/ppRest';
+import { StyleSheet, TextInput,Text, View, Button } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import {getPartyById} from '../services/ppRest';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import style from '../components/style';
+import {putParty,getPartyById} from '../services/ppRest';
 import {Party} from '../models';
 
 
@@ -20,6 +18,32 @@ export default function DetailsScreen(props: DetailProps) {
     const partyId = props.route.params.id;
     const [party, setParty] = React.useState<Party|undefined>();
 
+    const [errorMessage, setErrorMessage] = React.useState("");
+    const [partyName, setPartyName] = React.useState("");
+
+    const [streetAddress, setStreetAddress] = React.useState("");
+    const [apartment, setApartment] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const [price, setPrice] = React.useState("");
+
+
+    // Date
+    const [show, setShow] = React.useState(false);
+    const [days, setDays] = React.useState(0);
+    const [date, setDate] = React.useState(new Date(1598051730000));
+
+    const onChange = () => {
+        setDate(date);
+    };
+
+    async function getPartyData() {
+        const response = await getPartyById(partyId)
+        if (response){
+            setParty(response)
+            console.log(response)
+        }
+    }
+
     async function callCreateApi() {
         if(streetAddress != "" && apartment != "" && date != null && description != "" && price != "" && days != 0){
              const response = await putParty(partyName)
@@ -31,31 +55,6 @@ export default function DetailsScreen(props: DetailProps) {
          }
          setErrorMessage("Please fill in all the fields!")
      }
-
-    const [errorMessage, setErrorMessage] = React.useState("");
-    const [partyName, setPartyName] = React.useState("");
-
-    const [streetAddress, setStreetAddress] = React.useState("");
-    const [apartment, setApartment] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [price, setPrice] = React.useState("");
-
-
-    // Date
-    const [days, setDays] = React.useState(0);
-    const [date, setDate] = React.useState(new Date(1598051730000));
-
-    const onChange = () => {
-        setDate(date);
-      };
-
-    async function getPartyData() {
-        const response = await getPartyById(partyId)
-        if (response){
-            setParty(response)
-            console.log(response)
-        }
-    }
 
     React.useEffect(() => {
         getPartyData()
@@ -98,10 +97,10 @@ export default function DetailsScreen(props: DetailProps) {
             </Row>
             <Row>
                 <Col size={80}>
-                <DateTimePicker
-                    value={date}
-                    is24Hour={true}
-                    onChange={onChange}
+                    <DateTimePicker
+                        value={date}
+                        is24Hour={true}
+                        onChange={onChange}
                     />
                 </Col>
                 <Col size={40}></Col>
@@ -149,8 +148,7 @@ export default function DetailsScreen(props: DetailProps) {
             </Row>
         </View>
         <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
-                {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
-        )}
+        <Text style={styles.errorMessage}> {errorMessage} </Text>
     </View>
   );
 }
@@ -191,13 +189,13 @@ const styles = StyleSheet.create({
     createPartyContainer: {
         width: '80%',
         height: '80%',
-        margin: '10px',
+        margin: 10,
         backgroundColor: '#303138',
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
         borderRadius: 30,
-        boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
+        //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
         display: 'flex',
         justifyContent: 'center',
         paddingLeft: 30,

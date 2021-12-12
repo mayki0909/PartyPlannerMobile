@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView,ScrollView,View,Text,StyleSheet } from 'react-native';
+import { SafeAreaView,ScrollView,View,Text,StyleSheet,Image } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import {Party} from '../models';
@@ -12,7 +12,6 @@ interface ArchiveProps{
 
 export default function ArchiveScreen(props: ArchiveProps) {
   const [parties, setParties] = React.useState<Party[]>();
-
   const getParties = async () => {
     const data = await getAllParties()
     setParties(data)
@@ -30,6 +29,7 @@ export default function ArchiveScreen(props: ArchiveProps) {
         <ScrollView style={[style.content, styles.spacing]}>
           <Text style={styles.heading}>PARTY ARCHIVE</Text>
           <Grid>
+            
               {parties?.map((party,key)=>{
                 return(
                   <Row style={styles.spacing} key={key}>
@@ -38,12 +38,16 @@ export default function ArchiveScreen(props: ArchiveProps) {
                       <Text style={styles.dateText}>{party.info.dateFrom}</Text>
                     </Col>
                     <Col size={25} onPress={()=>{props.navigation.navigate('Party',{id:party.id})}}>
-                      <img src={require('../assets/images/go.svg')} alt="Go to" />
+                      <Image 
+                        source={require('../assets/images/go.png')} 
+                        style={{ width: 40, height: 40 }}
+                      />
                     </Col>
                   </Row>
                 )
               })}
-            </Grid>  
+            
+          </Grid>  
         </ScrollView>
     </SafeAreaView>
   );
@@ -85,6 +89,6 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     spacing:{
-      marginTop:'20px',
+      marginTop:20,
     },
 });

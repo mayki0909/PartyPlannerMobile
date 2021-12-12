@@ -38,10 +38,9 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
                 autoFocus={true}
                 value={partyName}
                 onChangeText={text => {setPartyName(text)}}
-            ></TextInput>
+            />
             <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
-                {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
-            )}
+            <Text style={styles.errorMessage}>{errorMessage} </Text>
         </View>
     </View>
   );
@@ -72,14 +71,14 @@ const styles = StyleSheet.create({
     createPartyContainer: {
         width: '80%',
         height: '30%',
-        margin: '10px',
+        margin: 10,
         backgroundColor: '#303138',
         paddingLeft: 20,
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
         borderRadius: 30,
-        boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
+        //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
         display: 'flex',
         justifyContent: 'center',
       },

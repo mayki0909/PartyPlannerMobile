@@ -14,8 +14,8 @@ export default function App() {
     return(
       <SafeAreaProvider style={style.body}>
           <Image 
-            source={require('./assets/images/PP_logotip.svg')}
-            style = {{ flex: 1, height: undefined, width: undefined, resizeMode: 'contain', margin:'40px'}}
+            source={require('./assets/images/PP_logotip.png')}
+            style = {{ flex: 1, height: undefined, width: undefined, resizeMode: 'contain', margin:40}}
           />
       </SafeAreaProvider>
     )
