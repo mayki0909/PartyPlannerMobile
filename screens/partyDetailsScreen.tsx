@@ -48,7 +48,7 @@ export default function DetailsScreen(props: DetailProps) {
         if(streetAddress != "" && apartment != "" && date != null && description != "" && price != "" && days != 0){
              const response = await putParty(partyName)
              if (response.id){
-                 props.navigation.navigate('Details',{
+                 props.navigation.navigate('Party',{
                      id: response.id
                  })
              }
@@ -102,7 +102,7 @@ export default function DetailsScreen(props: DetailProps) {
                             value={date}
                             is24Hour={true}
                             onChange={onChange}
-                        /> */}
+                        />  */}
                     </Col>
                     <Col size={40}></Col>
                 </Row>
