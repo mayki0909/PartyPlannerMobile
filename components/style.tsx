@@ -71,6 +71,7 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'left',
+    paddingLeft: 30,
   }
 
 });
