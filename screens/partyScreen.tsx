@@ -56,18 +56,21 @@ export default function PartyScreen(props: PartyProps) {
                 </Col>
             </Row>
 
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Calculate',{id: partyId})}}>
+                <Col size={130}>
+                    <Text style={styles.nameText}>CALCULATE</Text>
+                </Col>
+                <Col size={70} >
+                    <Image source={require('../assets/images/Calculator.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
+                </Col>
+            </Row>
+
             <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Share',{id: partyId})}}>
                 <Col size={130}>
                     <Text style={styles.nameText}>SHARE</Text>
                 </Col>
                 <Col size={70}>
                     <Image source={require('../assets/images/share.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
-                </Col>
-            </Row>
-
-            <Row style={styles.spacing}>
-                <Col size={130} style={styles.addCategory}>
-                    <Text style={[styles.nameText, styles.addCategoryText]}>+ ADD CATEGORY</Text>
                 </Col>
             </Row>
     </View>

@@ -20,12 +20,12 @@ export default function ShareScreen(props: ShareProps) {
       <Text style={styles.heading}>
         SHARE AN INVITE
       </Text>
-      <Text style={styles.url} onPress={copyIt}>
+      <Text style={styles.url} >
         {link}
       </Text>
-      <Text style={[style.btnMedium, styles.btnBigBlue]}>
-        Copy to clipboard
-      </Text>
+      <View style={[style.btnMedium,{borderColor: "#00ffff",width:150,marginTop: 20,marginBottom: 70}]} onTouchStart={copyIt}>
+        <Text style={styles.btnBigBlue}>Copy to clipboard</Text>
+      </View>
       <Text style={styles.heading}>
         SCAN IT
       </Text>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: 'transparent',
         alignItems: 'center',
+        // justifyContent: 'center',
         height:'60%',
         width: '80%',
         marginLeft: '10%',
@@ -64,7 +65,5 @@ const styles = StyleSheet.create({
     },
     btnBigBlue:{
       color: "#00ffff",
-      marginTop: 10,
-      marginBottom: 50,
     }
 });
