@@ -23,8 +23,8 @@ export default function ArchiveScreen(props: ArchiveProps) {
 
   return (
     <SafeAreaView style={styles.container}>
-        <View style={{backgroundColor: 'transparent'}} onTouchStart={async()=>{}}>
-          <Text style={[style.btnBig, styles.btnBigBlue]}>+ CREATE PARTY</Text>
+        <View style={style.btnBig} onTouchStart={async()=>{props.navigation.navigate('CreateParty')}}>
+          <Text style={styles.blueText}>+ CREATE PARTY</Text>
         </View>
         <ScrollView style={[style.content, styles.spacing]}>
           <Text style={styles.heading}>PARTY ARCHIVE</Text>
@@ -58,19 +58,20 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
       alignItems: 'center',
       justifyContent: 'center',
-      height:'80%',
+      height:'90%',
+      marginTop: 40
     },
-    btnBigBlue:{
+    blueText:{
       color: "#00ffff",
+      fontWeight: 'bold',
+      fontSize: 20
     },
     heading:{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
       width: 250,
       color: '#fff',
       fontSize: 20,
       fontWeight: 'bold',
+      textAlign: 'center',
     },
     nameText:{
       color: '#fff',
