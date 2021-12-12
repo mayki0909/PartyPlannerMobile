@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TextInput,Text, View, Button } from 'react-native';
+import { StyleSheet, TextInput,Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -61,95 +61,105 @@ export default function DetailsScreen(props: DetailProps) {
     }, []);
 
     return (
-    <View style={styles.container}>
-        <Text style={styles.title}>{party?.info.name} party</Text>
-        <View style={styles.createPartyContainer}>
-            <Row>
-                <Col size={120}>
-                    <Text style={styles.label}>Party address</Text>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={120}>
-                    <TextInput
-                        style={styles.inputField}
-                        placeholder="Street address and building number"
-                        autoFocus={true}
-                        value={streetAddress}
-                        onChangeText={text => {setStreetAddress(text)}}
-                    ></TextInput>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={120}>
-                    <TextInput
-                        style={styles.inputField}
-                        placeholder="Staircase / apartment / floor / other"
-                        value={apartment}
-                        onChangeText={text => {setApartment(text)}}
-                    ></TextInput>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={120}>
+    <SafeAreaView  style={styles.container}>
+        <ScrollView style={styles.createPartyContainer}>
+            <Text style={styles.title}>{party?.info.name} party</Text>
+            <Grid >
+                <Row>
+                    <Col size={120}>
+                        <Text style={styles.label}>Party address</Text>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size={120}>
+                        <TextInput
+                            style={styles.inputField}
+                            placeholder="Street address"
+                            placeholderTextColor="#E6E6E6" 
+                            autoFocus={true}
+                            value={streetAddress}
+                            onChangeText={text => {setStreetAddress(text)}}
+                        ></TextInput>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size={120}>
+                        <TextInput
+                            style={styles.inputField}
+                            placeholder="Apartment / floor / other"
+                            placeholderTextColor="#E6E6E6" 
+                            value={apartment}
+                            onChangeText={text => {setApartment(text)}}
+                        ></TextInput>
+                    </Col>
+                </Row>
+                <Row>
                     <Text style={styles.label}>Date</Text>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={80}>
-                    <DateTimePicker
-                        value={date}
-                        is24Hour={true}
-                        onChange={onChange}
-                    />
-                </Col>
-                <Col size={40}></Col>
-            </Row>
-            <Row>
-                <Col size={120}>
-                    <Text style={styles.label}>Description</Text>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={120}>
-                    <TextInput
-                        style={styles.inputFieldLarge}
-                        placeholder="Describe the party place"
-                        value={description}
-                        onChangeText={text => {setDescription(text)}}
-                    ></TextInput>
-                </Col>
-            </Row>
-            <Row>
-                <Col size={120}>
-                    <Text style={styles.label}>Pricing</Text>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <TextInput
-                        style={styles.inputField}
-                        placeholder="€"
-                        value={price}
-                        keyboardType={'numeric'}
-                        onChangeText={text => {setPrice(text)}}
-                    ></TextInput>
-                </Col>
-                <Col>
-                    <Text style={styles.text}>Days:</Text>
-                </Col>
-                <Col>
-                    <Text style={styles.number}>{days}</Text>
-                </Col>
-                <Col>
-                    <Text style={styles.count} onPress={ () => {setDays(days + 1)} }>+</Text>
-                    <Text style={[styles.count, styles.left]} onPress={ () => {if (days > 0) setDays(days - 1)} }>-</Text>
-                </Col>
-            </Row>
-        </View>
-        <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
-        <Text style={styles.errorMessage}> {errorMessage} </Text>
-    </View>
+                </Row>
+                <Row>
+                    <Col size={80}>
+                        {/* <DateTimePicker
+                            value={date}
+                            is24Hour={true}
+                            onChange={onChange}
+                        /> */}
+                    </Col>
+                    <Col size={40}></Col>
+                </Row>
+                <Row>
+                    <Col size={40}>
+                        <Text style={styles.text}>Days:</Text>
+                    </Col>
+                    <Col size={10}>
+                        <Text style={styles.count} onPress={ () => {if (days > 0) setDays(days - 1)} }>-</Text>
+                    </Col>
+                    <Col size={10}>
+                        <Text style={styles.number}>{days}</Text>
+                    </Col>
+                    <Col size={10}>
+                        <Text style={styles.count} onPress={ () => {setDays(days + 1)} }>+</Text>
+                    </Col>
+                </Row>
+                <Row>
+                    <Text style={styles.label}>Description</Text>       
+                </Row>
+                <Row>
+                    <Col size={120}>
+                        <TextInput
+                            style={styles.inputFieldLarge}
+                            placeholder="Describe the party place"
+                            placeholderTextColor="#E6E6E6" 
+                            value={description}
+                            onChangeText={text => {setDescription(text)}}
+                        ></TextInput>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size={120}>
+                        <Text style={styles.label}>Pricing</Text>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size={60}>
+                        <TextInput
+                            style={styles.inputField}
+                            placeholder="€"
+                            placeholderTextColor="#E6E6E6" 
+                            value={price}
+                            keyboardType={'numeric'}
+                            onChangeText={text => {setPrice(text)}}
+                        ></TextInput>
+                    </Col>
+                    <Col size={60}>
+                    </Col>
+                </Row>
+            </Grid>
+            <View style={[style.btnMedium,{borderColor: "#00ffff",marginTop: 40}]}>
+                <Text style={styles.button} onPress={callCreateApi}>Create</Text>
+            </View>
+            <Text style={styles.errorMessage}> {errorMessage} </Text>
+        </ScrollView>
+    </SafeAreaView >
   );
 }
 
@@ -158,7 +168,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
-        height:'80%',
+        height:'90%',
+        marginTop: 20,
     },
     label:{
         fontSize: 18,
@@ -169,36 +180,32 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     inputField:{
-        fontSize: 16,
-        borderRadius: 10,
+        fontSize: 20,
+        borderRadius: 20,
+        borderWidth: 3,
+        borderColor: "#3B3D44",
         color: '#fff',
-        borderColor: '#fff',
         height: 40,
-        marginRight: 30,
+        marginRight: 10,
         paddingLeft: 10
     },
     inputFieldLarge:{
-        fontSize: 16,
-        borderRadius: 10,
         color: '#fff',
-        borderColor: '#fff',
-        height: 200,
-        marginRight: 30,
+        fontSize: 16,
+        borderRadius: 20,
+        borderColor: '#3B3D44',
+        borderWidth: 3,
+        height: 80,
         paddingLeft: 10
     },
     createPartyContainer: {
         width: '80%',
-        height: '80%',
         margin: 10,
         backgroundColor: '#303138',
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
         borderRadius: 30,
-        //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
-        display: 'flex',
-        justifyContent: 'center',
-        paddingLeft: 30,
       },
     text: {
         color: '#fff',
@@ -209,14 +216,12 @@ const styles = StyleSheet.create({
     }, 
     number: {
         color: '#fff',
-        fontSize: 14,
-        marginTop: 10,
+        fontSize: 20,
     },
     count: {
         color: '#fff',
         fontSize: 20,
-        marginLeft: 10,
-        marginTop: -5,
+        fontWeight: 'bold',
     },
     left: {
         paddingLeft: 2,
@@ -231,7 +236,7 @@ const styles = StyleSheet.create({
     },
     button: {
         fontSize: 16,
-        marginTop: 20,
+        color: '#00ffff',
     },
     errorMessage: {
         color: 'red', 
