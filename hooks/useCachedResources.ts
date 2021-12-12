@@ -13,7 +13,7 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          'raleway': require('../assets/fonts/Raleway-Regular.ttf'),
+          'Raleway': require('../assets/fonts/Raleway-Regular.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

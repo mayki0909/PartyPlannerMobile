@@ -35,13 +35,15 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
             <TextInput
                 style={styles.inputField}
                 placeholder="Name your party"
+                placeholderTextColor="#E6E6E6" 
                 autoFocus={true}
                 value={partyName}
                 onChangeText={text => {setPartyName(text)}}
-            ></TextInput>
-            <Text style={[style.btnMedium, styles.button]} onPress={callCreateApi}>Create</Text>
-                {errorMessage && (<Text style={styles.errorMessage}> {errorMessage} </Text>
-            )}
+            />
+            <View style={[style.btnMedium,{borderColor: "#00ffff",marginTop: 20}]}>
+                <Text style={styles.button} onPress={callCreateApi}>Create</Text>
+            </View>
+            <Text style={styles.errorMessage}>{errorMessage} </Text>
         </View>
     </View>
   );
@@ -62,30 +64,36 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
     inputField:{
-        fontSize: 24,
-        borderRadius: 10,
+        fontSize: 20,
+        borderRadius: 20,
+        borderWidth: 3,
+        borderColor: "#3B3D44",
         color: '#fff',
         height: 40,
         marginRight: 10,
         paddingLeft: 10
     },
+    '::placeholder':{
+        color: '#fff',
+    },
     createPartyContainer: {
         width: '80%',
         height: '30%',
-        margin: '10px',
+        minHeight: 200,
+        margin: 10,
         backgroundColor: '#303138',
         paddingLeft: 20,
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
         borderRadius: 30,
-        boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
+        borderWidth: 3,
+        borderColor: "#3B3D44",
         display: 'flex',
         justifyContent: 'center',
       },
       button: {
         fontSize: 16,
-        marginTop: 20,
       },
       errorMessage: {
         color: 'red', 

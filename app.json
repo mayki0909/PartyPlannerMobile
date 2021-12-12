@@ -4,11 +4,11 @@
     "slug": "PartyPlannerMobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/PP_logo.svg",
+    "icon": "./assets/images/PP_logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/PP_logotip.svg",
+      "image": "./assets/images/PP_logotip.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
