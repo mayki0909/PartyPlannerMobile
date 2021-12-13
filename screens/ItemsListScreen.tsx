@@ -51,9 +51,9 @@ export default function ItemsListScreen(props: ItemsList) {
         await getPartyData()
     }
 
-    // function navigateCategory(){
-    //     props.navigation.navigate('Item',{id:party.id})
-    // }
+    function navigateCategory(categoryId:Number){
+        props.navigation.navigate('Items',{id:partyId,categoryId:categoryId})
+    }
 
     React.useEffect(() => {
         getPartyData()
@@ -79,7 +79,7 @@ export default function ItemsListScreen(props: ItemsList) {
                 </View>
                 {items?.map((category:Category,key)=>{
                     return(
-                        <Row style={styles.spacing} key={key}>
+                        <Row style={styles.spacing} key={key} onTouchEnd={()=>{navigateCategory(category.categoryId)}}>
                             <Col size={110}>
                                 <Text style={styles.nameText}>{category.name}</Text>
                             </Col>
