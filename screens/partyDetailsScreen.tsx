@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, TextInput,Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
+import { StyleSheet, TextInput,Text, View, SafeAreaView, ScrollView, Image , Platform} from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import style from '../components/style';
 import {putParty,getPartyById} from '../services/ppRest';
 import {Party} from '../models';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 
 interface DetailProps{
@@ -29,12 +31,30 @@ export default function DetailsScreen(props: DetailProps) {
 
     // Date
     const [show, setShow] = React.useState(false);
+    const [showDate, setShowDate] = React.useState(false);
     const [days, setDays] = React.useState(0);
-    const [date, setDate] = React.useState(new Date(1598051730000));
+    const [mode, setMode] = React.useState('date');
+    const [date, setDate] = React.useState(new Date());
 
-    const onChange = () => {
-        setDate(date);
+    const onChange = (event: Event, selectedDate?: Date) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+        setShowDate(true);
+      };
+    
+    const showMode = (currentMode: React.SetStateAction<string>) => {
+        setShow(true);
+        setMode(currentMode);
+      };
+
+    const showDatepicker = () => {
+        showMode('date');
     };
+
+    const showTimepicker = () => {
+        showMode('time');
+      };
 
     async function getPartyData() {
         const response = await getPartyById(partyId)
@@ -97,17 +117,24 @@ export default function DetailsScreen(props: DetailProps) {
                     <Text style={styles.label}>Date</Text>
                 </Row>
                 <Row>
-                    <Col size={80}>
-                        {/* <DateTimePicker
+                    <Col size={100}>
+                        <Text style={styles.button} onPress={showDatepicker}>Choose date</Text>
+                        {show && <RNDateTimePicker
+                            testID="dateTimePicker"
                             value={date}
+                            mode={mode}
                             is24Hour={true}
+                            display="default"
+                            dateFormat="day month year"
                             onChange={onChange}
-                        />  */}
+                        />  }
                     </Col>
-                    <Col size={40}></Col>
+                    <Col size={80}>
+                        <Text style={styles.button} onPress={showTimepicker}>Choose time</Text>
+                    </Col>
                 </Row>
                 <Row>
-                    <Col size={40}>
+                    <Col size={25}>
                         <Text style={styles.text}>Days:</Text>
                     </Col>
                     <Col size={10}>
@@ -116,7 +143,7 @@ export default function DetailsScreen(props: DetailProps) {
                     <Col size={10}>
                         <Text style={styles.number}>{days}</Text>
                     </Col>
-                    <Col size={10}>
+                    <Col size={20}>
                         <Text style={styles.count} onPress={ () => {setDays(days + 1)} }>+</Text>
                     </Col>
                 </Row>
@@ -174,7 +201,7 @@ const styles = StyleSheet.create({
     label:{
         fontSize: 18,
         color: '#fff',
-        paddingBottom: 5,
+        paddingBottom: 10,
         paddingTop: 20,
         textAlign: 'left',
         fontWeight: 'bold',
@@ -187,7 +214,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         height: 40,
         marginRight: 10,
-        paddingLeft: 10
+        paddingLeft: 10,
+        marginBottom: 10,
     },
     inputFieldLarge:{
         color: '#fff',
@@ -199,13 +227,14 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     createPartyContainer: {
-        width: '80%',
+        width: '90%',
         margin: 10,
         backgroundColor: '#303138',
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
         borderRadius: 30,
+        paddingRight: 20,
       },
     text: {
         color: '#fff',
@@ -217,11 +246,13 @@ const styles = StyleSheet.create({
     number: {
         color: '#fff',
         fontSize: 20,
+        paddingTop: 5,
     },
     count: {
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold',
+        paddingTop: 5,
     },
     left: {
         paddingLeft: 2,
@@ -243,4 +274,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 10,
     },
+    dateText: {
+        color: '#fff',
+        fontSize: 16,
+        paddingTop: 8,
+    }
 });
