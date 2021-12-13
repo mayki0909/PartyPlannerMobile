@@ -39,7 +39,7 @@ export default function PartyScreen(props: PartyProps) {
                     <Image source={require('../assets/images/Pin.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                 </Col>
             </Row>
-            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('Items',{id: partyId})}}>
+            <Row style={styles.spacing} onTouchStart={async()=>{props.navigation.navigate('ItemsList',{id: partyId})}}>
                 <Col size={130}>
                     <Text style={styles.nameText}>ITEMS NEEDED</Text>
                 </Col>

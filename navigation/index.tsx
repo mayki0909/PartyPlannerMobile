@@ -17,6 +17,7 @@ import ShareScreen from '../screens/shareScreen';
 import PartyScreen from '../screens/partyScreen';
 import CreatePartyScreen from '../screens/createPartyScreen';
 import PartyDetailsScreen from '../screens/partyDetailsScreen';
+import ItemsListScreen from '../screens/ItemsListScreen';
 
 const MyTheme = {
   dark: true,
@@ -83,6 +84,11 @@ function RootNavigator() {
       <Stack.Screen 
         name={'Share'}
         component={ShareScreen} 
+        options={{ headerTitle: (props) => <LogoTitle /> }}
+      ></Stack.Screen>
+      <Stack.Screen 
+        name={'ItemsList'}
+        component={ItemsListScreen} 
         options={{ headerTitle: (props) => <LogoTitle /> }}
       ></Stack.Screen>
       <Stack.Screen name={'TabOne'} component={TabOneScreen}></Stack.Screen>
