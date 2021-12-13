@@ -134,6 +134,12 @@ export default function DetailsScreen(props: DetailProps) {
                     </Col>
                 </Row>
                 <Row>
+                    <Col size={70}>
+                        <Text style={styles.dateText}>
+                            {moment(date).format('lll')}
+                        </Text>                        
+                    </Col>
+                    
                     <Col size={25}>
                         <Text style={styles.text}>Days:</Text>
                     </Col>
