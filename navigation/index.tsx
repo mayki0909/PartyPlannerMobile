@@ -19,6 +19,7 @@ import CreatePartyScreen from '../screens/createPartyScreen';
 import PartyDetailsScreen from '../screens/partyDetailsScreen';
 import ItemsListScreen from '../screens/ItemsListScreen';
 import ItemsScreen from '../screens/ItemsScreen';
+import CalculateScreen from '../screens/calculateScreen';
 import GuestScreen from '../screens/guestScreen';
 
 const MyTheme = {
@@ -98,6 +99,11 @@ function RootNavigator() {
         component={ItemsScreen} 
         options={{ headerTitle: (props) => <LogoTitle /> }}
       ></Stack.Screen>
+      <Stack.Screen 
+        name={'Calculate'}
+        component={CalculateScreen} 
+        options={{ headerTitle: (props) => <LogoTitle /> }}
+       ></Stack.Screen>
       <Stack.Screen 
         name={'Guests'}
         component={GuestScreen} 

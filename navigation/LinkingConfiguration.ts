@@ -21,6 +21,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         Share: '/share',
         ItemsList: '/itemsList',
         Items:'/items',
+        Calculate:'/calculate',
         Guests:'/guests',
         TabOne: {
           screens: {
