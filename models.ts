@@ -22,7 +22,7 @@ export interface GuestList{
     guests: Guest[];
 }
 export interface Guest{
-    guestId: Number;
+    guestId: number | undefined;
     name: String;
     surname: String;
     email: String;
