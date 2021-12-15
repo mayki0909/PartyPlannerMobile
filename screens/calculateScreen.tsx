@@ -66,7 +66,21 @@ export default function CalculateScreen(props: PartyProps) {
                             <Text style={styles.price}> {food}€</Text>
                             <Text>
                             {party?.categories.forEach(element => {
-                                    
+                                const keys = Object.keys(element);
+                                
+                                keys.forEach((key, index) => {
+                                    if(key == "items"){
+                                        console.log(`${key}: ${element[key]}`);
+
+                                        const items = Object.keys(element[key])
+
+                                        items.forEach((item, i) => {
+                                            
+                                            console.log(`${item}: ${element[key]}`)
+
+                                        });
+                                    }
+                                });
                             })};
                             
                             </Text>
