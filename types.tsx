@@ -15,6 +15,7 @@ export type RootStackParamList = {
   Share:undefined;
   ItemsList:undefined;
   Items:undefined;
+  Calculate:undefined;
   Modal: undefined;
   NotFound: undefined;
   TabOne: undefined;
