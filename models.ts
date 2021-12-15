@@ -52,3 +52,8 @@ export interface Item{
     price: Number;
     quantity: Number;
 }
+
+export interface CategoryBudget{
+    name:String;
+    sum:Number;
+}
