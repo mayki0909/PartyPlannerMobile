@@ -13,6 +13,8 @@ export type RootStackParamList = {
   Details:undefined;
   PartyInfo:undefined;
   Share:undefined;
+  ItemsList:undefined;
+  Items:undefined;
   Modal: undefined;
   NotFound: undefined;
   TabOne: undefined;

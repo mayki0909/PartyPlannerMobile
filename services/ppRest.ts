@@ -104,8 +104,8 @@ export const deleteGuest = async (partyId:String, guestId:Number) =>{
         method: 'DELETE',
         headers: headers,
     });
-    let data = await response.json();
-    return data;
+
+    return response;
 }
 
 ///CATEGORY
@@ -148,8 +148,8 @@ export const deleteCategory = async (partyId:String,categoryId:Number) => {
         method: 'DELETE',
         headers: headers,
     });
-    let data = await response.json();
-    return data;
+
+    return response;
 }
 
 export const getCategoryById = async (partyId:String,categoryId:Number) => {
