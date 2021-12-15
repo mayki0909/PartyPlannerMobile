@@ -3,7 +3,7 @@ import { SafeAreaView,ScrollView,View,Text,StyleSheet,Image } from 'react-native
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import {getPartyById} from '../services/ppRest';
-import {Party} from '../models';
+import {Party, Category, Item} from '../models';
 
 interface PartyProps{
   navigation: any;
@@ -22,6 +22,11 @@ export default function CalculateScreen(props: PartyProps) {
     const [people, setPeople] = React.useState(0)
     const [total, setTotal] = React.useState(0)
     const [guests, setGuests] = React.useState(0)
+
+    
+    let categoryBudget: Array<{name: any, sum: any}> = []
+    let totalBudget = 0
+    let perPerson = 0
     
     async function getPartyData() {
         // TODO Check if party name not null and show error
@@ -33,10 +38,39 @@ export default function CalculateScreen(props: PartyProps) {
         // TODO Show error ...
     }
 
+
+    function calculate(){
+
+        const categories:Category[] | undefined = party?.categories
+
+        if(categories){
+
+            categories.forEach((category:Category) => {
+                
+                var sum: number = 0;
+
+                category.items.forEach((item:Item) =>{
+                    if(item.price && item.quantity)
+                        sum+= Number(item.price) * Number(item.quantity)
+
+                })
+                const name = category.name;
+
+                categoryBudget.push({name, sum})
+                totalBudget += sum
+            });
+        totalBudget += Number(party?.info.budget)
+        perPerson = party?.guests.length ? totalBudget/party.guests.length : 0
+        }
+    }
+
     React.useEffect(() => {
         getPartyData()
     }, []);
 
+    React.useEffect(() => {
+        calculate()
+    }, [party]);
 
   return (
     <View style={styles.page}>
@@ -59,48 +93,20 @@ export default function CalculateScreen(props: PartyProps) {
                         <Image source={require('../assets/images/Pin.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                     </Col>
                 </Row>
-
-                <Row style={styles.spacing}>
-                    <Col size={130}>
-                        <Text style={styles.nameText}>Food 
-                            <Text style={styles.price}> {food}€</Text>
-                            <Text>
-                            {party?.categories.forEach(element => {
-                                const keys = Object.keys(element);
-                                
-                                keys.forEach((key, index) => {
-                                    if(key == "items"){
-                                        console.log(`${key}: ${element[key]}`);
-
-                                        const items = Object.keys(element[key])
-
-                                        items.forEach((item, i) => {
-                                            
-                                            console.log(`${item}: ${element[key]}`)
-
-                                        });
-                                    }
-                                });
-                            })};
-                            
-                            </Text>
-                        </Text>
-                    </Col>
-                    <Col size={30} >
-                        <Image source={require('../assets/images/Beer.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
-                    </Col>
-                </Row>
-
-                <Row style={styles.spacing}>
-                    <Col size={130}>
-                        <Text style={styles.nameText}>Drinks
-                            <Text style={styles.price}> {drinks}€</Text>
-                        </Text>
-                    </Col>
-                    <Col size={30} >
-                        <Image source={require('../assets/images/Beer.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
-                    </Col>
-                </Row>
+                {categoryBudget.map((category,key)=>{
+                    return(
+                        <Row style={styles.spacing}>
+                            <Col size={130}>
+                                <Text style={styles.nameText}>{category.name}
+                                    <Text style={styles.price}> {category.sum}€</Text>
+                                </Text>
+                            </Col>
+                            <Col size={30} >
+                                <Image source={require('../assets/images/Beer.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
+                            </Col>
+                        </Row>
+                    )
+                })}
 
                 <Row style={styles.spacing}>
                     <Col size={130}>
