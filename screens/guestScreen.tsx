@@ -123,7 +123,7 @@ export default function GuestsScreen(props: GuestsProps) {
                     />
                     <TextInput
                         style={styles.inputField}
-                        placeholder="name.surname@gmail.com"
+                        placeholder="Email"
                         placeholderTextColor="#E6E6E6" 
                         value={email}
                         onChangeText={text => {setEmail(text)}}
@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         borderWidth: 3,
         borderColor: "#3B3D44",
-        //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
     },
     addCategory: {
         backgroundColor: '#7F818B',
@@ -239,6 +238,7 @@ const styles = StyleSheet.create({
         color: 'red', 
         fontSize: 16,
         marginTop: 10,
+        textAlign: 'center',
       },
       label:{
         fontSize: 16,
@@ -262,6 +262,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginRight: 10,
         paddingLeft: 10
-
     },
 });

@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
     createPartyContainer: {
         width: '80%',
         margin: 15,
+        paddingRight: 20,
       },
       button: {
         color: '#FFF',
