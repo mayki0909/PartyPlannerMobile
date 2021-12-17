@@ -61,8 +61,7 @@ export const postPartyDetails = async (partyId:String,partyInfo: Info) => {
         headers: headers,
         body: JSON.stringify(partyInfo)
     });
-    let data = await response.json();
-    return data;
+    return response;
 }
 
 //GUESTS
