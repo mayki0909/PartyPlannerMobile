@@ -71,6 +71,7 @@ export default function DetailsScreen(props: DetailProps) {
                  props.navigation.navigate('Party',{
                      id: response.id
                  })
+                setErrorMessage('')
              }
          }
          setErrorMessage("Please fill in all the fields!")

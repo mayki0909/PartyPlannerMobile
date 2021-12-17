@@ -41,11 +41,16 @@ export default function ItemsScreen(props: ItemsList) {
             'price': Number(price),
             'quantity': quantity
         }
-        setItemList([...itemList,newItem])
-        setItemname('')
-        setDescription('')
-        setPrice('0.00 €')
-        setQuantity(0)
+        if(newItem.name != "" && newItem.price != 0 && newItem.description != "" && quantity != 0){
+            setItemList([...itemList,newItem])
+            setItemname('')
+            setDescription('')
+            setPrice('')
+            setQuantity(0)
+            setErrorMessage("")
+        }else{
+            setErrorMessage("Please fill in all the fields!")
+        }
     }
 
     async function deleteItem(name:String) {
@@ -66,19 +71,20 @@ export default function ItemsScreen(props: ItemsList) {
         return(
             <View style={styles.spacing}>
                     <Row>
-                        <Col>
-                            <Text style={styles.inputField} >
+                        <Col size={60}>
+                            <Text style={styles.item} >
                                 {item.name}
                             </Text>
                         </Col>
-                        <Col>
-                            <Text style={styles.inputField} >
+                        <Col size={5}></Col>
+                        <Col size={60}>
+                            <Text style={styles.item} >
                                 {item.price} €
                             </Text>
                         </Col>
                     </Row>
                     <Row>
-                        <Text style={styles.inputField} >
+                        <Text style={styles.item} >
                             {item.description}
                         </Text>
                     </Row>
@@ -112,9 +118,10 @@ export default function ItemsScreen(props: ItemsList) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.createPartyContainer}>
+                <Text style={styles.added}>Add an item:</Text>
                 <View style={styles.spacing}>
                     <Row>
-                        <Col>
+                        <Col size={60}>
                             <TextInput
                                 style={styles.inputField}
                                 placeholder="Item"
@@ -123,7 +130,8 @@ export default function ItemsScreen(props: ItemsList) {
                                 onChangeText={text => {setItemname(text)}}
                             />
                         </Col>
-                        <Col>
+                        <Col size={5}></Col>
+                        <Col size={60}>
                             <TextInput
                                 style={styles.inputField}
                                 placeholder="0.00 €"
@@ -162,6 +170,10 @@ export default function ItemsScreen(props: ItemsList) {
                     </Row>
                     <Text style={styles.errorMessage}>{errorMessage}</Text>
                 </View>
+                <View>
+                    <Text style={styles.added}>Currently added items:</Text>
+                </View>
+                
                 {itemList.map((item:Item,key)=>{
                     return(
                         renderItem(item)
@@ -182,10 +194,10 @@ const styles = StyleSheet.create({
     spacing:{
         marginTop: 20,
         padding: 10,
+        paddingTop: 20,
         borderRadius: 40,
         borderWidth: 3,
         borderColor: "#3B3D44",
-        //boxShadow: '4px 4px 10px #23242A, -4px -4px 10px #3B3D44',
     },
     addCategory: {
         backgroundColor: '#7F818B',
@@ -214,6 +226,7 @@ const styles = StyleSheet.create({
         color: 'red', 
         fontSize: 16,
         marginTop: 10,
+        textAlign: 'center',
       },
       label:{
         fontSize: 16,
@@ -230,6 +243,25 @@ const styles = StyleSheet.create({
         color: '#fff',
         height: 40,
         width: '100%',
-        paddingLeft: 10
+        paddingLeft: 10,
+        marginBottom: 10,
+    },
+    item:{
+        fontSize: 20,
+        borderRadius: 20,
+        borderWidth: 3,
+        borderColor: "#3B3D44",
+        color: '#fff',
+        height: 40,
+        width: '100%',
+        paddingLeft: 10,
+        paddingTop: 7,
+        marginBottom: 10,
+    },
+    added: {
+        fontSize: 22,
+        textAlign: 'center',
+        color: '#fff',
+        marginTop: 20,
     },
 });

@@ -63,7 +63,7 @@ export default function ItemsListScreen(props: ItemsList) {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.createPartyContainer}>
                 <View style={styles.spacing}>
-                    <Text style={styles.label}>Name your party:</Text>
+                    <Text style={styles.label}>Name your category:</Text>
                     <TextInput
                         style={styles.inputField}
                         placeholder="CATEGORY"
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     createPartyContainer: {
         width: '80%',
         margin: 15,
+        paddingRight: 20,
       },
       button: {
         color: '#FFF',
@@ -139,6 +140,8 @@ const styles = StyleSheet.create({
         color: 'red', 
         fontSize: 16,
         marginTop: 10,
+        marginBottom: 10,
+        textAlign: 'center',
       },
       label:{
         fontSize: 16,

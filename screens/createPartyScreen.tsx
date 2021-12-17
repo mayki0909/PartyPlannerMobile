@@ -23,6 +23,7 @@ export default function CreatePartyScreen(props: CreatePartyProps) {
                 props.navigation.navigate('Details',{
                     id: response.id
                 })
+                setErrorMessage('')
             }
         }
         setErrorMessage("The party name can't be empty!")
@@ -99,6 +100,6 @@ const styles = StyleSheet.create({
       errorMessage: {
         color: 'red', 
         fontSize: 16,
-        marginTop: 10,
+        marginBottom: 20,
       }
 });
