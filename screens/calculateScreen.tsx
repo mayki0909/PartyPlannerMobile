@@ -29,9 +29,11 @@ export default function CalculateScreen(props: PartyProps) {
             setGuests(response.guests.length)
 
             const categories:Category[] = response.categories
+            let temArr:CategoryBudget[]=[]
+            let budget:number=0;
+
             categories.forEach((category:Category) => {
-                
-                var sum: number = 0;
+                let sum: number = 0;
 
                 category.items.forEach((item:Item) =>{
                     if(item.price && item.quantity)
@@ -39,10 +41,11 @@ export default function CalculateScreen(props: PartyProps) {
 
                 })
                 const name = category.name;
-
-                setCategoryBudget([...categoryBudget,{name,sum}])
-                setTotalBudget(totalBudget + sum) 
+                temArr.push({name,sum})
+                budget+=sum;
             });
+            setTotalBudget(budget) 
+            setCategoryBudget(temArr)
             if(Number(party?.info.budget) > 0) setTotalBudget(totalBudget + Number(party?.info.budget))
         }
     }
