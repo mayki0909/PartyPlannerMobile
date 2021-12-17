@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SafeAreaView,ScrollView,View,Text,StyleSheet,Image,TextInput} from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-import {getPartyById,putGuest,deleteGuest} from '../services/ppRest';
+import {getPartyById,putGuest,deleteGuest,postGuestList} from '../services/ppRest';
 import {Party,Guest} from '../models';
 import style from '../components/style';
 
@@ -58,6 +58,18 @@ export default function GuestsScreen(props: GuestsProps) {
             await deleteGuest(partyId,id)
             await getPartyData()
         }
+    }
+
+    async function updateGuestList(guest:Guest,type:String){
+        if(type==='vegetarian')guest.vegetarian = !guest.vegetarian
+        if(type==='vegan')guest.vegan = !guest.vegan
+        if(type==='nonDrinker')guest.nonDrinker = !guest.nonDrinker
+        if(type==='paid')guest.paid = !guest.paid
+
+        const newGuests = [...guests,guest]
+        const response = await postGuestList(partyId,newGuests)
+        console.log(response) 
+        setGuests(newGuests)
     }
 
     const renderImageMeat = (variable: Boolean) => {
@@ -163,16 +175,16 @@ export default function GuestsScreen(props: GuestsProps) {
                             </Row>
                             
                             <Row style={{marginTop:20,marginLeft: 20}}>
-                                <Col size={30}>
+                                <Col size={30} onPress={async()=>{updateGuestList(guest,'vegetarian')}}>
                                     <Image source={renderImageMeat(guest.vegetarian)} style={{flex: 1, width: 30, resizeMode: 'contain'}}/>      
                                 </Col>
-                                <Col size={30}>
+                                <Col size={30} onPress={async()=>{updateGuestList(guest,'vegan')}}>
                                     <Image source={renderImageVegan(guest.vegan)} style={{flex: 1, width: 30, resizeMode: 'contain'}}/>
                                 </Col>
-                                <Col size={30}>
+                                <Col size={30} onPress={async()=>{updateGuestList(guest,'nonDrinker')}}>
                                     <Image source={renderImageBeer(guest.nonDrinker)} style={{flex: 1, width: 30, resizeMode: 'contain'}}/>
                                 </Col>
-                                <Col size={30}>
+                                <Col size={30} onPress={async()=>{updateGuestList(guest,'paid')}}>
                                     <Image source={renderImagePaid(guest.paid)} style={{flex: 1, width: 30, resizeMode: 'contain'}}/>
                                 </Col>
                             </Row>
@@ -247,7 +259,9 @@ const styles = StyleSheet.create({
         borderColor: "#3B3D44",
         color: '#fff',
         height: 40,
+        marginTop: 10,
         marginRight: 10,
         paddingLeft: 10
+
     },
 });
