@@ -23,12 +23,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/PP_logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "party.planner"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/mayki0909/PartyPlannerMobile"
   }
 }
