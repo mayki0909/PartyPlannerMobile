@@ -47,8 +47,8 @@ export default function ItemsListScreen(props: ItemsList) {
     }
 
     async function deleteCategoryHandler(key:Number) {
+        await setItems(items.filter(item => item.categoryId !== key));
         await deleteCategory(partyId,key);
-        await getPartyData()
     }
 
     function navigateCategory(categoryId:Number){
@@ -79,11 +79,11 @@ export default function ItemsListScreen(props: ItemsList) {
                 </View>
                 {items?.map((category:Category,key)=>{
                     return(
-                        <Row style={styles.spacing} key={key} onTouchEnd={()=>{navigateCategory(category.categoryId)}}>
-                            <Col size={110}>
+                        <Row style={styles.spacing} key={key}>
+                            <Col size={110} onPress={()=>{navigateCategory(category.categoryId)}}>
                                 <Text style={styles.nameText}>{category.name}</Text>
                             </Col>
-                            <Col size={70} >
+                            <Col size={70} onPress={()=>{navigateCategory(category.categoryId)}}>
                                 <Image source={require('../assets/images/food_category.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                             </Col>
                             <Col size={20} onPress={async()=>{await deleteCategoryHandler(category.categoryId)}}>

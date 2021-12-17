@@ -68,43 +68,7 @@ export default function ItemsScreen(props: ItemsList) {
     }
 
     function renderItem(item:Item){
-        return(
-            <View style={styles.spacing}>
-                    <Row>
-                        <Col size={60}>
-                            <Text style={styles.item} >
-                                {item.name}
-                            </Text>
-                        </Col>
-                        <Col size={5}></Col>
-                        <Col size={60}>
-                            <Text style={styles.item} >
-                                {item.price} €
-                            </Text>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Text style={styles.item} >
-                            {item.description}
-                        </Text>
-                    </Row>
-                    <Row>
-                        <Col size={20}></Col>
-                        <Col size={40}>
-            
-                            <Text style={styles.label}>Qty: {item.quantity}</Text>
-                        </Col>
-                        <Col size={20}>
-                            
-                        </Col>
-                        <Col size={100}>
-                            <View style={[style.btnMedium,{borderColor: "#db00ff"}]}>
-                                <Text style={styles.button} onPress={()=>{deleteItem(item.name)}}>Delete</Text>
-                            </View>
-                        </Col>
-                    </Row>
-                </View>
-        )
+        
     }
 
     React.useEffect(() => {
@@ -176,7 +140,41 @@ export default function ItemsScreen(props: ItemsList) {
                 
                 {itemList.map((item:Item,key)=>{
                     return(
-                        renderItem(item)
+                        <View style={styles.spacing} key={key}>
+                            <Row>
+                                <Col size={60}>
+                                    <Text style={styles.item} >
+                                        {item.name}
+                                    </Text>
+                                </Col>
+                                <Col size={5}></Col>
+                                <Col size={60}>
+                                    <Text style={styles.item} >
+                                        {item.price} €
+                                    </Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Text style={styles.item} >
+                                    {item.description}
+                                </Text>
+                            </Row>
+                            <Row>
+                                <Col size={20}></Col>
+                                <Col size={40}>
+                    
+                                    <Text style={styles.label}>Qty: {item.quantity}</Text>
+                                </Col>
+                                <Col size={20}>
+                                    
+                                </Col>
+                                <Col size={100}>
+                                    <View style={[style.btnMedium,{borderColor: "#db00ff"}]}>
+                                        <Text style={styles.button} onPress={()=>{deleteItem(item.name)}}>Delete</Text>
+                                    </View>
+                                </Col>
+                            </Row>
+                        </View>
                     )
                 })}
             </ScrollView>

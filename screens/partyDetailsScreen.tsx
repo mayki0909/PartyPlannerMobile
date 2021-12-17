@@ -64,7 +64,7 @@ export default function DetailsScreen(props: DetailProps) {
     async function callCreateApi() {
         if(streetAddress != "" && apartment != "" && date != null && description != "" && price != ""){
             let partyInfo: Info ={
-                'name':'',
+                'name':partyName,
                 'address':streetAddress,
                 'exactDirections':apartment,
                 'description':description,
