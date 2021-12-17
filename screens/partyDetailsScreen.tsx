@@ -3,8 +3,8 @@ import { StyleSheet, TextInput,Text, View, SafeAreaView, ScrollView, Image , Pla
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import style from '../components/style';
-import {putParty,getPartyById} from '../services/ppRest';
-import {Party} from '../models';
+import {getPartyById,postPartyDetails} from '../services/ppRest';
+import {Party,Info} from '../models';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
@@ -20,8 +20,8 @@ export default function DetailsScreen(props: DetailProps) {
     const [party, setParty] = React.useState<Party|undefined>();
 
     const [errorMessage, setErrorMessage] = React.useState("");
-    const [partyName, setPartyName] = React.useState("");
 
+    const [partyName, setPartyName] = React.useState("");
     const [streetAddress, setStreetAddress] = React.useState("");
     const [apartment, setApartment] = React.useState("");
     const [description, setDescription] = React.useState("");
@@ -30,7 +30,6 @@ export default function DetailsScreen(props: DetailProps) {
 
     // Date
     const [show, setShow] = React.useState(false);
-    const [showDate, setShowDate] = React.useState(false);
     const [days, setDays] = React.useState(0);
     const [mode, setMode] = React.useState('date');
     const [date, setDate] = React.useState(new Date());
@@ -39,7 +38,6 @@ export default function DetailsScreen(props: DetailProps) {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
-        setShowDate(true);
       };
     
     const showMode = (currentMode: React.SetStateAction<string>) => {
@@ -64,21 +62,40 @@ export default function DetailsScreen(props: DetailProps) {
     }
 
     async function callCreateApi() {
-        if(streetAddress != "" && apartment != "" && date != null && description != "" && price != "" && days != 0){
-             const response = await putParty(partyName)
-             if (response.id){
+        if(streetAddress != "" && apartment != "" && date != null && description != "" && price != ""){
+            let partyInfo: Info ={
+                'name':'',
+                'address':streetAddress,
+                'exactDirections':apartment,
+                'description':description,
+                'budget': Number(price),
+                'dateFrom':date,
+                'dateTo':date,
+            }
+            const response = await postPartyDetails(partyId,partyInfo)
+             if (response.ok){
                  props.navigation.navigate('Party',{
-                     id: response.id
+                     id: partyId
                  })
-                setErrorMessage('')
+                
              }
+             setErrorMessage('')
          }
          setErrorMessage("Please fill in all the fields!")
-     }
+    }
 
     React.useEffect(() => {
         getPartyData()
     }, []);
+
+    React.useEffect(()=>{
+        if(party?.info.name != null) setPartyName(String(party?.info.name))
+        if(party?.info.address != null) setStreetAddress(String(party?.info.address))
+        if(party?.info.exactDirections != null) setApartment(String(party?.info.exactDirections))
+        if(party?.info.description != null) setDescription(String(party?.info.description))
+        if(party?.info.budget != null) setPrice(String(party?.info.budget))
+        if(party?.info.dateFrom != null) setDate(party.info.dateFrom)
+    },[party])
 
     return (
     <SafeAreaView  style={styles.container}>
