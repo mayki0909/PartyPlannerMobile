@@ -66,10 +66,10 @@ export default function GuestsScreen(props: GuestsProps) {
         if(type==='nonDrinker')guest.nonDrinker = !guest.nonDrinker
         if(type==='paid')guest.paid = !guest.paid
 
-        const newGuests = [...guests,guest]
-        const response = await postGuestList(partyId,newGuests)
-        console.log(response) 
-        setGuests(newGuests)
+        // const newGuests = [...guests,guest]
+        // const response = await postGuestList(partyId,newGuests)
+        // console.log(response) 
+        // setGuests(newGuests)
     }
 
     const renderImageMeat = (variable: Boolean) => {
