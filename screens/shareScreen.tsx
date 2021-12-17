@@ -33,7 +33,7 @@ export default function ShareScreen(props: ShareProps) {
           SCAN IT
         </Text>
         <QRCode  
-          size={200}
+          size={180}
           value={link} />
       </View>
     </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         width: '80%',
         marginLeft: '10%',
         marginRight: '10%',
-        marginTop: '20%',
+        marginTop: '10%',
         borderRadius: 30,
         shadowColor: '#23242A',
         shadowOffset: {width: 4, height: 4},
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
       fontSize: 25,
       fontWeight: 'bold',
       marginTop: 20,
-      marginBottom: 30,
+      marginBottom: 20,
     },
     url:{
       color: '#FFF',

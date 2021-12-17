@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, TextInput,Text, View, SafeAreaView, ScrollView, Image , Platform} from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 import style from '../components/style';
 import {putParty,getPartyById} from '../services/ppRest';
