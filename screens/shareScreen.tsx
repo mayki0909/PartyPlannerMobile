@@ -17,20 +17,25 @@ export default function ShareScreen(props: ShareProps) {
   const copyIt = ()=> Clipboard.setString(link)
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>
-        SHARE AN INVITE
-      </Text>
-      <Text style={styles.url} >
-        {link}
-      </Text>
-      <View style={[style.btnMedium,{borderColor: "#00ffff",width:150,marginTop: 20,marginBottom: 70}]} onTouchStart={copyIt}>
+      <View style={styles.border}>
+        <Text style={styles.heading}>
+          SHARE AN INVITE
+        </Text>
+        <Text style={styles.url} >
+          {link}
+        </Text>
+      <View style={[style.btnMedium,{borderColor: "#00ffff",width:150,marginTop: 20,marginBottom: 20}]} onTouchStart={copyIt}>
         <Text style={styles.btnBigBlue}>Copy to clipboard</Text>
       </View>
-      <Text style={styles.heading}>
-        SCAN IT
-      </Text>
-      <QRCode size={150}
-        value={link} />
+      </View>
+      <View style={styles.border}>
+        <Text style={styles.heading}>
+          SCAN IT
+        </Text>
+        <QRCode  
+          size={200}
+          value={link} />
+      </View>
     </View>
   );
 }
@@ -65,5 +70,15 @@ const styles = StyleSheet.create({
     },
     btnBigBlue:{
       color: "#00ffff",
+    },
+    border:{
+      borderRadius: 40,
+      borderWidth: 3,
+      borderColor: "#3B3D44",
+      backgroundColor: 'transparent',
+      alignItems: 'center',
+      minWidth: 320,
+      marginBottom: 20,
+      paddingBottom: 20
     }
 });

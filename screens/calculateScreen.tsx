@@ -17,9 +17,8 @@ export default function CalculateScreen(props: PartyProps) {
     const [party, setParty] = React.useState<Party>()
     const [guests, setGuests] = React.useState(0)
     const [categoryBudget, setCategoryBudget] = React.useState<CategoryBudget[]>([])
-
-    let totalBudget = 0
-    let perPerson = 0
+    const [totalBudget,setTotalBudget] = React.useState(0);
+    const [perPerson, setPerperson] = React.useState('0')
     
     async function getPartyData() {
 
@@ -42,16 +41,20 @@ export default function CalculateScreen(props: PartyProps) {
                 const name = category.name;
 
                 setCategoryBudget([...categoryBudget,{name,sum}])
-                totalBudget += sum
+                setTotalBudget(totalBudget + sum) 
             });
-            totalBudget += Number(party?.info.budget)
-            perPerson = guests ? totalBudget / guests : 0
+            if(Number(party?.info.budget) > 0) setTotalBudget(totalBudget + Number(party?.info.budget))
         }
     }
 
     React.useEffect(() => {
         getPartyData()
+        setPerperson((guests > 0? (totalBudget / guests).toFixed(2) : '0'))
     }, []);
+
+    React.useEffect(() => {
+        setPerperson((guests > 0? (totalBudget / guests).toFixed(2) : '0'))
+    }, [totalBudget]);
 
     return (
         <SafeAreaView style={styles.page}>
@@ -65,36 +68,38 @@ export default function CalculateScreen(props: PartyProps) {
                         }}
                     />
                     <Row style={styles.spacing}>
-                        <Col size={130}>
+                        <Col size={130} style={{justifyContent: 'center'}}>
                             <Text style={styles.nameText}>
-                                <Text style={styles.price}>{party?.info.budget}€</Text>
+                                {console.log(party?.info.budget)}
+                                Place 
+                                <Text style={styles.price}> {party?.info.budget}€</Text>
                             </Text>
                         </Col>
-                        <Col size={30} >
+                        <Col size={30} style={{justifyContent: 'center'}}>
                             <Image source={require('../assets/images/Pin.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                         </Col>
                     </Row>
                     {categoryBudget.map((category,key)=>{
                         return(
                             <Row style={styles.spacing} key={key}>
-                                <Col size={130}>
+                                <Col size={130} style={{justifyContent: 'center'}}>
                                     <Text style={styles.nameText}>{category.name}
                                         <Text style={styles.price}> {category.sum}€</Text>
                                     </Text>
                                 </Col>
-                                <Col size={30} >
+                                <Col size={30} style={{justifyContent: 'center'}}>
                                     <Image source={require('../assets/images/Beer.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                                 </Col>
                             </Row>
                         )
                     })}
                     <Row style={styles.spacing}>
-                        <Col size={130}>
+                        <Col size={130} style={{justifyContent: 'center'}}>
                             <Text style={styles.nameText}>People invited 
                                 <Text style={styles.price}> {guests} </Text>
                             </Text>
                         </Col>
-                        <Col size={30} >
+                        <Col size={30} style={{justifyContent: 'center'}}>
                             <Image source={require('../assets/images/Person.png')} style={{flex: 1, width: 100, resizeMode: 'contain'}}/>
                         </Col>
                     </Row>
@@ -104,7 +109,7 @@ export default function CalculateScreen(props: PartyProps) {
                     <Text style={styles.totalTitle}>TOTAL</Text>
                     <Text style={styles.total}>TOTAL {totalBudget}€</Text>
                     <Text style={styles.total}>GUESTS {guests}</Text>
-                    <Text style={styles.total}>PER PERSON {totalBudget / guests}€</Text>
+                    <Text style={styles.total}>PER PERSON {perPerson}€</Text>
             </View>
             
         </SafeAreaView>
