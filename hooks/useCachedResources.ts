@@ -13,17 +13,16 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          'Raleway': require('../assets/fonts/Raleway-Regular.ttf'),
+          Raleway: require('../assets/fonts/Raleway-Regular.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
-        console.log('problem')
         console.warn(e);
       } finally {
         setTimeout(()=>{
           setLoadingComplete(true);
           SplashScreen.hideAsync();
-        },150) //Set to 1500
+        },1500) //Set to 1500
         
       }
     }
