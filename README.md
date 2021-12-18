@@ -8,6 +8,9 @@ In app you can:
  * Add quest by hand or send them invite link or they can scan qr code.
  * App will automaticly calculated money you will need to throw a party.
 
+## Apk
+Here is the link to the .apk file of the application.
+
 # Installation
  * Node.js version v14.18.1 https://nodejs.org/en/blog/release/v14.18.1/
  * npm install -g expo-cli
