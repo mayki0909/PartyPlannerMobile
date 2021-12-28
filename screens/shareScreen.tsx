@@ -13,7 +13,7 @@ interface ShareProps{
 
 export default function ShareScreen(props: ShareProps) {
   const partyId = props.route.params.id;
-  let link = 'http://app.partyplanner.si/party?'+partyId
+  let link = 'http://app.partyplanner.si/invite/'+partyId
   const copyIt = ()=> Clipboard.setString(link)
   return (
     <View style={styles.container}>

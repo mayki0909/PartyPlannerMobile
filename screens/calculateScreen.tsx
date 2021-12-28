@@ -44,9 +44,14 @@ export default function CalculateScreen(props: PartyProps) {
                 temArr.push({name,sum})
                 budget+=sum;
             });
-            setTotalBudget(budget) 
+
+            if (Number(response?.info.budget) > 0) {
+                setTotalBudget(budget + Number(response?.info.budget))
+            } else {
+                setTotalBudget(budget)
+            } 
+            
             setCategoryBudget(temArr)
-            if(Number(party?.info.budget) > 0) setTotalBudget(totalBudget + Number(party?.info.budget))
         }
     }
 
@@ -73,7 +78,6 @@ export default function CalculateScreen(props: PartyProps) {
                     <Row style={styles.spacing}>
                         <Col size={130} style={{justifyContent: 'center'}}>
                             <Text style={styles.nameText}>
-                                {console.log(party?.info.budget)}
                                 Place 
                                 <Text style={styles.price}> {party?.info.budget}€</Text>
                             </Text>
