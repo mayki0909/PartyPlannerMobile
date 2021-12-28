@@ -10,7 +10,7 @@ In app you can:
 
 ## Apk
 Here is the link to the .apk file of the application.
-https://drive.google.com/file/d/1TNVge6al3F1qea91iBe1_khnLr9Ff5KU/view?usp=sharing
+https://drive.google.com/file/d/1sYk0n-JZ2k55PTzjzJuKEe8KCWIN2lEq/view?usp=sharing
 
 # Installation
  * Node.js version v14.18.1 https://nodejs.org/en/blog/release/v14.18.1/
